@@ -1,25 +1,19 @@
 package com.jerome.dao;
 
-import com.jerome.bean.userInfo;
+import com.jerome.bean.libraryInfo;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class userDao {
-    /*
-     * 用户的数据库操作类
-     * 增删改查
-     */
-
-
-
-    public static boolean insert (userInfo info) {
-        String sql = "INSERT INTO `user`(`id`, `userName`, `passWord`) VALUES (NULL,?,?)";
+public class libraryDao {
+    public static boolean insert (libraryInfo info) {
+        String sql = "INSERT INTO `library`(`id`, `name`, `address`, `manager`) VALUES (NULL,?,?,?)";
 
         List<Object> params = new ArrayList<Object>();
-        params.add(info.getUserName());
-        params.add(info.getPassWord());
+        params.add(info.getName());
+        params.add(info.getAddress());
+        params.add(info.getManager());
 
         try {
             return mysqlDao.getMysqlutil().executeUpdate(sql , params);
@@ -30,7 +24,7 @@ public class userDao {
     }
 
     public static boolean delete (Object field , Object where) {
-        String sql = "DELETE FROM `user` where " + field + " = ?";
+        String sql = "DELETE FROM `library` where " + field + " = ?";
 
         List<Object> params = new ArrayList<Object>();
         params.add(where);
@@ -43,13 +37,14 @@ public class userDao {
         return false;
     }
 
-    public static boolean update (userInfo info) {
-        String sql = "UPDATE `user` SET `id`=?,`userName`=?,`passWord`=? WHERE id = ?";
+    public static boolean update (libraryInfo info) {
+        String sql = "UPDATE `library` SET `id`=?,`name`=?,`address`=?,`manager`=? WHERE id = ?";
 
         List<Object> params = new ArrayList<Object>();
         params.add(info.getId());
-        params.add(info.getUserName());
-        params.add(info.getPassWord());
+        params.add(info.getName());
+        params.add(info.getAddress());
+        params.add(info.getManager());
         params.add(info.getId());
 
         try {
@@ -60,25 +55,25 @@ public class userDao {
         return false;
     }
 
-    public static userInfo findSimpleUser (String field , String value) {
-        String sql = "select * from user where " + field + " = ?";
+    public static libraryInfo findSimplelibrary (int id) {
+        String sql = "select * from library where id = ?";
 
         List<Object> params = new ArrayList<Object>();
-        params.add(value);
+        params.add(id);
 
         try {
-            return mysqlDao.getMysqlutil().findSimpleRefResult(sql , params , userInfo.class);
+            return mysqlDao.getMysqlutil().findSimpleRefResult(sql , params , libraryInfo.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static List<userInfo> findAllUser () {
-        String sql = "select * from user";
+    public static List<libraryInfo> findAlllibrary () {
+        String sql = "select * from library";
 
         try {
-            return mysqlDao.getMysqlutil().findMoreRefResult(sql , null , userInfo.class);
+            return mysqlDao.getMysqlutil().findMoreRefResult(sql , null , libraryInfo.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

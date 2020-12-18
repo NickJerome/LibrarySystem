@@ -5,7 +5,9 @@ import com.jerome.bean.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class test {
     public static String upperFirstWord (String word) {
@@ -48,7 +50,7 @@ public class test {
         }*/
 
 
-        try {
+        /*try {
             Field[] fields = curatorInfo.class.getDeclaredFields();
             List<curatorInfo> infos = curatorDao.findAllCurator();
             for (int j = 0 ; j < infos.size() ; ++j) {
@@ -61,6 +63,6 @@ public class test {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }
