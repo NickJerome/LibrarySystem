@@ -60,11 +60,11 @@ public class userDao {
         return false;
     }
 
-    public static userInfo findSimpleUser (int id) {
-        String sql = "select * from user where id = ?";
+    public static userInfo findSimpleUser (String field , String value) {
+        String sql = "select * from user where " + field + " = ?";
 
         List<Object> params = new ArrayList<Object>();
-        params.add(id);
+        params.add(value);
 
         try {
             return mysqlDao.getMysqlutil().findSimpleRefResult(sql , params , userInfo.class);
